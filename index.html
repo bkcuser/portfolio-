@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'unsafe-inline'; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="theme-color" content="#070b1a">
+<title>MHR TURJO | Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#070b1a;--ink:#eaf0ff;--mut:#9aa6d4;--v:#7c5cff;--a:#22d3c5;--m:#ff5c9d;--glass:rgba(255,255,255,.07);--line:rgba(255,255,255,.15)}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{font-family:'Sora',system-ui,-apple-system,'Segoe UI',sans-serif;background:var(--bg);color:var(--ink);line-height:1.7;overflow-x:hidden;min-height:100vh;-webkit-tap-highlight-color:transparent}
+img{-webkit-user-drag:none;user-select:none}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--a);outline-offset:3px}
+
+/* Background */
+.bg{position:fixed;inset:0;z-index:-1;overflow:hidden}
+.blob{position:absolute;border-radius:50%;filter:blur(90px);opacity:.5;animation:float 18s ease-in-out infinite alternate}
+.b1{width:48vmax;height:48vmax;background:var(--v);top:-15vmax;left:-12vmax}
+.b2{width:42vmax;height:42vmax;background:var(--a);bottom:-14vmax;right:-10vmax;animation-delay:-6s}
+.b3{width:26vmax;height:26vmax;background:var(--m);top:42%;left:55%;opacity:.28;animation-delay:-11s}
+@keyframes float{to{transform:translate(6vmax,4vmax) scale(1.15)}}
+
+/* Header + menu */
+header{position:fixed;top:0;left:0;right:0;z-index:40;display:flex;justify-content:space-between;align-items:center;padding:calc(14px + env(safe-area-inset-top,0px)) 20px 14px}
+.brand{font-weight:700;letter-spacing:.1em;font-size:1rem}
+.mbtn{width:46px;height:46px;border-radius:50%;border:1px solid var(--line);background:var(--glass);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);cursor:pointer;display:grid;place-content:center;gap:6px}
+.mbtn i{display:block;height:2px;background:var(--ink);border-radius:2px;transition:.35s}
+.mbtn i:first-child{width:22px}
+.mbtn i:last-child{width:13px;margin-left:auto}
+.mbtn[aria-expanded=true] i:first-child{transform:translateY(4px) rotate(45deg)}
+.mbtn[aria-expanded=true] i:last-child{width:22px;transform:translateY(-4px) rotate(-45deg)}
+.scrim{position:fixed;inset:0;background:rgba(3,5,15,.4);opacity:0;pointer-events:none;transition:opacity .3s;z-index:20}
+.scrim.open{opacity:1;pointer-events:auto}
+.panel{position:fixed;top:0;right:0;height:100%;width:min(320px,82vw);padding:100px 30px 30px;background:rgba(14,18,40,.42);backdrop-filter:blur(22px) saturate(140%);-webkit-backdrop-filter:blur(22px) saturate(140%);border-left:1px solid var(--line);transform:translateX(100%);visibility:hidden;transition:transform .45s cubic-bezier(.2,.8,.2,1),visibility 0s .45s;z-index:30;display:flex;flex-direction:column;gap:8px}
+.panel.open{transform:none;visibility:visible;transition:transform .45s cubic-bezier(.2,.8,.2,1)}
+.panel a{font-size:1.35rem;font-weight:600;padding:12px 0 12px 16px;border-left:2px solid transparent;color:var(--mut);transition:.25s}
+.panel a:hover,.panel a:focus-visible{color:var(--ink);border-left-color:var(--a);padding-left:24px}
+
+/* Layout */
+section{padding:110px 20px 40px}
+.wrap{max-width:860px;margin:0 auto}
+h2{font-size:clamp(1.6rem,4.5vw,2.3rem);font-weight:700;margin-bottom:22px;text-align:center}
+.glass{background:var(--glass);border:1px solid var(--line);border-radius:26px;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:0 20px 60px rgba(0,0,0,.25)}
+
+/* Profile picture */
+.pic{--s:min(190px,46vw);width:var(--s);height:var(--s);position:relative;border-radius:50%;margin:0 auto}
+.pic::before{content:"";position:absolute;inset:-6px;border-radius:50%;background:conic-gradient(var(--v),var(--a),var(--m),var(--v));animation:spin 8s linear infinite}
+.pic .in{position:absolute;inset:0;border-radius:50%;overflow:hidden;border:4px solid var(--bg);background:#101636;display:grid;place-items:center}
+.pic img{width:100%;height:100%;object-fit:cover;display:block}
+.pic .ini{display:none;font-size:calc(var(--s) * .42);font-weight:700;color:var(--a)}
+.pic.nopic img{display:none}
+.pic.nopic .ini{display:block}
+.pic.sm{--s:min(140px,40vw);margin-bottom:26px}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* Hero */
+#home{min-height:100svh;display:flex;align-items:center;justify-content:center;text-align:center;padding-top:90px}
+#home .pic{margin-bottom:34px}
+h1{font-size:clamp(1.8rem,6.4vw,3.6rem);font-weight:700;line-height:1.2;min-height:1.3em}
+.caret{display:inline-block;width:3px;height:.95em;background:var(--a);margin-left:4px;vertical-align:-.1em;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.tag{color:var(--mut);margin-top:14px;font-size:1.02rem}
+.enter{opacity:0;transform:translateY(18px);animation:enter .9s cubic-bezier(.2,.8,.2,1) forwards}
+.e2{animation-delay:.25s}.e3{animation-delay:.5s}
+@keyframes enter{to{opacity:1;transform:none}}
+
+/* About */
+.about{padding:38px 28px;text-align:center}
+.about p{color:#cdd6f6;max-width:62ch;margin:0 auto 14px}
+.about p:last-child{margin-bottom:0}
+
+/* Contact */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px}
+.card{display:flex;align-items:center;gap:16px;padding:22px;transition:transform .3s,border-color .3s}
+.card:hover,.card:focus-visible{transform:translateY(-5px);border-color:var(--a)}
+.ico{flex:none;width:52px;height:52px;border-radius:16px;display:grid;place-items:center;background:linear-gradient(135deg,var(--v),var(--a))}
+.ico svg{width:26px;height:26px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.card b{display:block;font-size:1.02rem}
+.card span{display:block;color:var(--mut);font-size:.88rem;word-break:break-all}
+
+/* Footer */
+footer{margin-top:80px;padding:34px 20px calc(34px + env(safe-area-inset-bottom,0px));text-align:center;border-top:1px solid var(--line);background:rgba(7,11,26,.5);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+footer p{color:var(--mut);font-size:.9rem}
+.top{margin:0 auto 18px;display:inline-flex;align-items:center;gap:10px;padding:12px 24px;border-radius:999px;border:1px solid var(--line);background:var(--glass);color:var(--ink);font:600 .95rem 'Sora',system-ui,sans-serif;cursor:pointer;transition:.3s}
+.top:hover{border-color:var(--a);transform:translateY(-3px)}
+.top svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+
+/* DevTools lock screen */
+#lock{display:none;position:fixed;inset:0;z-index:999;background:var(--bg);color:var(--ink);place-items:center;text-align:center;padding:30px;font-weight:600}
+.locked #lock{display:grid}
+.locked main,.locked header,.locked footer,.locked .bg,.locked .panel,.locked .scrim{display:none}
+
+@media (prefers-reduced-motion:reduce){
+ html{scroll-behavior:auto}
+ *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+ .enter{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<div class="bg" aria-hidden="true"><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div></div>
+
+<header>
+  <a class="brand" href="#home" data-go="home" id="brand"> ZONE</a>
+  <button class="mbtn" id="mbtn" aria-label="Open menu" aria-expanded="false" aria-controls="panel"><i></i><i></i></button>
+</header>
+<div class="scrim" id="scrim"></div>
+<nav class="panel" id="panel" aria-label="Main menu">
+  <a href="#home" data-go="home">Home</a>
+  <a href="#about" data-go="about">About Me</a>
+  <a href="#contact" data-go="contact">Contact Me</a>
+</nav>
+
+<main>
+  <section id="home">
+    <div class="wrap">
+      <div class="pic enter" data-pic><div class="in"><img alt="Profile picture" width="190" height="190" draggable="false"><span class="ini"></span></div></div>
+      <h1 class="enter e2"><span id="typed"></span><span class="caret" aria-hidden="true"></span></h1>
+      <p class="tag enter e3" id="tagline"></p>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="wrap">
+      <h2>About Me</h2>
+      <div class="glass about">
+        <div class="pic sm" data-pic><div class="in"><img alt="Profile picture" width="140" height="140" draggable="false"><span class="ini"></span></div></div>
+        <div id="aboutText"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap">
+      <h2>Contact Me</h2>
+      <div class="cards">
+        <a class="glass card" id="cFb" target="_blank" rel="noopener noreferrer">
+          <div class="ico"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></div>
+          <div><b>Facebook</b><span id="tFb"></span></div>
+        </a>
+        <a class="glass card" id="cMail">
+          <div class="ico"><svg viewBox="0 0 24 24"><path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/><path d="M22 6 12 13 2 6"/></svg></div>
+          <div><b>Email</b><span id="tMail"></span></div>
+        </a>
+        <a class="glass card" id="cWa" target="_blank" rel="noopener noreferrer">
+          <div class="ico"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 21l2.1-5.4A8.4 8.4 0 1 1 21 11.5z"/><path d="M9 8.5c0 3.3 2.7 6 6 6l1-1.5-2-1-1 .7a4 4 0 0 1-1.9-1.9l.7-1-1-2z"/></svg></div>
+          <div><b>WhatsApp</b><span id="tWa"></span></div>
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <button class="top" id="toTop" type="button"><svg viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></svg>Back to Home</button>
+  <p id="copy"></p>
+</footer>
+
+<div id="lock" role="alert">Please close Developer Tools to view this site.</div>
+<noscript><p style="position:fixed;inset:0;display:grid;place-items:center;background:#070b1a;color:#fff;font-family:sans-serif;z-index:1000">Please enable JavaScript to view this site.</p></noscript>
+
+<script>
+/* =====================================================
+   ✏️ EDIT HERE: put your own details in this block only
+   ===================================================== */
+const CONFIG = {
+  siteName:   "MHRT TURJO",
+  typing:     ["Welcome to MHRT Zone"],              // one or more lines; many lines = type, delete, repeat
+  tagline:    "Student • Cheat coder", // short line under the welcome text
+
+  profilePic: "e.jpg",   // 👈 your picture file name/path (put the file next to index.html)
+
+  facebook:   "https://www.facebook.com/mhrturjo0",  // 👈 your Facebook link
+  email:      "hrturjo99@gmail.com",                   // 👈 your email
+  whatsapp:   "8801710244934",                          // 👈 WhatsApp number with country code, digits only
+
+  about: [                                              // 👈 each line below is one paragraph in "About Me"
+    "Write about yourself here. Who you are, what you build, and what you love about coding.",
+    "Add another paragraph for your skills, experience or goals."
+  ]
+};
+
+/* ---------- Fill the page from CONFIG ---------- */
+(function(){
+  const $ = id => document.getElementById(id);
+  document.title = CONFIG.siteName + " | Portfolio";
+  $("brand").textContent = CONFIG.siteName;
+  $("tagline").textContent = CONFIG.tagline;
+  $("copy").textContent = "© " + new Date().getFullYear() + " " + CONFIG.siteName + ". All rights reserved.";
+
+  document.querySelectorAll("[data-pic]").forEach(function(w){
+    const img = w.querySelector("img");
+    w.querySelector(".ini").textContent = CONFIG.siteName.charAt(0);
+    img.onerror = function(){ w.classList.add("nopic"); };
+    img.src = CONFIG.profilePic;
+  });
+
+  CONFIG.about.forEach(function(t){
+    const p = document.createElement("p"); p.textContent = t; $("aboutText").appendChild(p);
+  });
+
+  $("cFb").href = CONFIG.facebook;   $("tFb").textContent = CONFIG.facebook.replace(/^https?:\/\/(www\.)?/, "");
+  $("cMail").href = "mailto:" + CONFIG.email;  $("tMail").textContent = CONFIG.email;
+  $("cWa").href = "https://wa.me/" + CONFIG.whatsapp.replace(/\D/g, "");  $("tWa").textContent = "+" + CONFIG.whatsapp.replace(/\D/g, "");
+
+  /* ---------- Typing effect ---------- */
+  const el = $("typed"), lines = CONFIG.typing;
+  let li = 0, ci = 0, del = false;
+  if (matchMedia("(prefers-reduced-motion:reduce)").matches) { el.textContent = lines[0]; }
+  else (function tick(){
+    const t = lines[li];
+    el.textContent = t.slice(0, ci);
+    if (!del) {
+      if (ci < t.length) { ci++; return setTimeout(tick, 85); }
+      if (lines.length < 2) return;
+      del = true; return setTimeout(tick, 1700);
+    }
+    if (ci > 0) { ci--; return setTimeout(tick, 40); }
+    del = false; li = (li + 1) % lines.length; setTimeout(tick, 350);
+  })();
+
+  /* ---------- Menu + smooth scroll ---------- */
+  const btn = $("mbtn"), panel = $("panel"), scrim = $("scrim");
+  function setMenu(open){
+    panel.classList.toggle("open", open); scrim.classList.toggle("open", open);
+    btn.setAttribute("aria-expanded", open); btn.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+  }
+  btn.addEventListener("click", function(){ setMenu(!panel.classList.contains("open")); });
+  scrim.addEventListener("click", function(){ setMenu(false); });
+  document.addEventListener("keydown", function(e){ if (e.key === "Escape") setMenu(false); });
+
+  function go(id){
+    setMenu(false);
+    if (id === "home") window.scrollTo({ top: 0, behavior: "smooth" });
+    else $(id).scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+  document.querySelectorAll("[data-go]").forEach(function(a){
+    a.addEventListener("click", function(e){ e.preventDefault(); go(a.dataset.go); });
+  });
+  $("toTop").addEventListener("click", function(){ go("home"); });
+})();
+
+/* ---------- Protection (deterrents) ---------- */
+(function(){
+  // Stop the page being embedded in someone else's site (clickjacking)
+  if (window.top !== window.self) { try { window.top.location = window.self.location; } catch(e) { document.documentElement.innerHTML = ""; } }
+
+  // Right click, drag and copy-shortcuts for source
+  document.addEventListener("contextmenu", function(e){ e.preventDefault(); });
+  document.addEventListener("dragstart", function(e){ e.preventDefault(); });
+  document.addEventListener("keydown", function(e){
+    const c = e.ctrlKey || e.metaKey, k = e.code;
+    if (k === "F12" ||
+       (c && e.shiftKey && (k === "KeyI" || k === "KeyJ" || k === "KeyC")) ||
+       (c && (k === "KeyU" || k === "KeyS")) ||
+       (e.metaKey && e.altKey && (k === "KeyI" || k === "KeyJ" || k === "KeyU"))) {
+      e.preventDefault(); e.stopPropagation();
+    }
+  }, true);
+
+  // Hide the page while DevTools is docked open (desktop only)
+  if (!matchMedia("(pointer:coarse)").matches) {
+    setInterval(function(){
+      const open = (outerWidth - innerWidth > 200) || (outerHeight - innerHeight > 250);
+      document.documentElement.classList.toggle("locked", open);
+    }, 700);
+  }
+})();
+</script>
+</body>
+</html>
